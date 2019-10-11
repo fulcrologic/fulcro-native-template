@@ -1,0 +1,27 @@
+{
+    "name": "app",
+    "version": "1.0.0",
+    "description": "",
+    "private": true,
+    "dependencies": {
+        "highlight.js": "^9.13.1",
+        "react-grid-layout": "^0.16.6",
+        "react-icons": "^2.2.7",
+        "reakit": "^0.11.2"
+    },
+    "scripts": {
+    },
+    "devDependencies": {
+        "intl-messageformat": "^2.2.0",
+        "karma": "^3.1.1",
+        "karma-chrome-launcher": "^2.2.0",
+        "karma-cljs-test": "^0.1.0",
+        "npm-run-all": "^4.1.5",
+        "react": "^16.6.8",
+        "react-dom": "^16.6.8",
+        "shadow-cljs": "^2.8.62",
+        "showdown": "^1.8.7"
+    },
+    "author": "",
+    "license": "MIT"
+}
