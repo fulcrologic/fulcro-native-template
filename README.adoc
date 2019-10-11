@@ -1,0 +1,62 @@
+== Fulcro Native Template
+
+This repository is a work-in-progress.
+
+This is a project that could be used as the basis for a
+full-stack Fulcro native+web project where the logic
+of the web and native apps is shared as much as possible.
+
+This particular example shares login logic among the web
+and native UIs, along with some basic routing.
+
+In the interest of time, a tour of this project is
+available on https://youtu.be/03I9uRxVQsc[YouTube].
+
+== Basic Usage
+
+IMPORTANT: If you want to use Electron Fulcro Inspect with
+the native app, you must uncomment the
+preload line in `shadow-cljs.edn`.
+
+NOTE: Logging errors in the Native env will show
+an error screen on the app. Just press ESC to
+continue in the simulator if that happens.
+
+In one terminal, start up expo:
+
+```
+$ cd mobile
+$ yarn
+$ expo start
+```
+
+In another terminal, start up CLJS build:
+
+```
+$ yarn
+$ npx shadow-cljs server
+```
+
+Go to http://localhost:9630/dashboard and
+click on Builds, and check the native
+and web builds (you should see both of them
+build).
+
+Make sure you have the clojure CLI tools
+installed, and in a 3rd terminal start a REPL:
+
+```
+$ clj -A:dev
+user=> (restart)
+```
+
+You should see a message about starting.
+
+Open http://localhost:3000. This is the webapp.
+
+Go to the Expo terminal window and press 'i'
+(requires XCode and Simulator to be installed).
+
+An iPad/Phone simulator should start with the app.
+
+There is a demo login account of "user"/"letmein".

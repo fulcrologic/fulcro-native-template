@@ -855,11 +855,6 @@
     pouchdb-collections "^1.0.1"
     tiny-queue "^0.2.1"
 
-"@js-joda/locale_en-us@2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@js-joda/locale_en-us/-/locale_en-us-2.0.1.tgz#2f56645955fabd97279954a30756fc367e44cdb5"
-  integrity sha512-7af7QST8F7sk08xpv//rWNFBHRLFaj4XbYNBXT4V8QgpmwzY3TJorZ5Ok/L2s3Djf2/qB7kBb7zIg6Ox+RNrjg==
-
 "@react-native-community/cli@^1.2.1":
   version "1.11.2"
   resolved "https://registry.yarnpkg.com/@react-native-community/cli/-/cli-1.11.2.tgz#b14967f24a389f5a16889a747345cf0e5757a2f1"
@@ -1319,11 +1314,6 @@ big-integer@^1.6.7:
   version "1.6.47"
   resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.47.tgz#e1e9320e26c4cc81f64fbf4b3bb20e025bf18e2d"
   integrity sha512-9t9f7X3as2XGX8b52GqG6ox0GvIdM86LyIXASJnDCFhYNgt+A+MByQZ3W2PyMRZjEvG5f8TEbSPfEotVuMJnQg==
-
-big.js@5.2.2:
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/big.js/-/big.js-5.2.2.tgz#65f0af382f578bcdc742bd9c281e9cb2d7768328"
-  integrity sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==
 
 blob@0.0.5:
   version "0.0.5"
@@ -3100,16 +3090,6 @@ jest-worker@^24.0.0-alpha.6:
   dependencies:
     merge-stream "^2.0.0"
     supports-color "^6.1.0"
-
-js-joda-timezone@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/js-joda-timezone/-/js-joda-timezone-2.1.1.tgz#73b55e558f59a1490ce3e52d1a686689d6bdb416"
-  integrity sha512-l7PltQExLbI2gnzkvmzh+TFZcuAFiphmI93MUd6t/Zx3enVhjwXX3StD2QmibLdNXygqcxeBh4pkqcrlnGMTrQ==
-
-js-joda@1.11.0:
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/js-joda/-/js-joda-1.11.0.tgz#e0e424b049cf7a9db3ed7729a6ca1f7d96b2486e"
-  integrity sha512-/HJpRhwP2fPyuSsCaZuoVJuaSIt8tUXykV4wOMRXrFk7RP9h9VWaFdS9YHKdMepxb/3TdXpL6IhfC9L0sqYVBw==
 
 js-levenshtein@^1.1.3:
   version "1.1.6"
