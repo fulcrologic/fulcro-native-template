@@ -179,6 +179,5 @@
 
 (defsc Root [this {:root/keys [top-chrome]}]
   {:query         [{:root/top-chrome (comp/get-query TopChrome)}]
-   :ident         (fn [] [:component/id :ROOT])
    :initial-state {:root/top-chrome {}}}
   (ui-top-chrome top-chrome))
