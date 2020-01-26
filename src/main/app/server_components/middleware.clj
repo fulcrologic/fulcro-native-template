@@ -9,11 +9,11 @@
     [reitit.ring :as ring]
     [ring.middleware.defaults :refer [wrap-defaults]]
     [ring.middleware.gzip :refer [wrap-gzip]]
+    [ring.middleware.session.memory :as mem]
     [ring.util.response :refer [response file-response resource-response]]
     [ring.util.response :as resp]
     [hiccup.page :refer [html5]]
-    [taoensso.timbre :as log]
-    [ring.middleware.session.memory :as mem]))
+    [taoensso.timbre :as log]))
 
 (def ^:private not-found-handler
   (fn [req]
