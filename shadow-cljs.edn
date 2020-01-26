@@ -14,7 +14,7 @@
             {:target     :react-native
              :init-fn    app.client-native/init
              :output-dir "mobile/app"
-             :dev        {:closure-defines {app.client-native/SERVER_URL "http://localhost:3000/api"}}
+             :dev        {:closure-defines {app.client-native/SERVER_URL "http://localhost:3000/api-native"}}
              :release    {:compiler-options {:optimizations     :simple
                                              :infer-externs     :auto
                                              :variable-renaming :off

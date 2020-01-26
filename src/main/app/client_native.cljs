@@ -11,7 +11,7 @@
     [app.model.session :as session]))
 
 ;; See defines in shadow-cljs for dev mode
-(goog-define SERVER_URL "http://production.server.com/api")
+(goog-define SERVER_URL "http://production.server.com/api-native")
 
 (defn ^:export start
   {:dev/after-load true}

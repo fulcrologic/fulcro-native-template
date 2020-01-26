@@ -21,6 +21,7 @@
            mount                               {:mvn/version "0.1.16"}
            ring/ring-core                      {:mvn/version "1.7.0"}
            ring/ring-defaults                  {:mvn/version "0.3.2"}
+           metosin/reitit-ring                 {:mvn/version "0.4.2"}
 
            ;; logging
            com.taoensso/timbre                 {:mvn/version "4.10.0"}}
