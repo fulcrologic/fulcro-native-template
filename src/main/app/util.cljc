@@ -1,7 +1,8 @@
 (ns app.util
   #?(:cljs (:refer-clojure :exclude [uuid]))
-  (:require [ghostwheel.core :refer [>defn]]
-            [clojure.spec.alpha :as s]))
+  (:require
+    [com.fulcrologic.guardrails.core :refer [>defn =>]]
+    [clojure.spec.alpha :as s]))
 
 (>defn uuid
   "Generate a UUID the same way via clj/cljs.  Without args gives random UUID. With args, builds UUID based on input (which
