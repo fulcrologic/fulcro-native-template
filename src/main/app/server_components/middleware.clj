@@ -22,7 +22,6 @@
      :body    "NOPE"}))
 
 (defn api-handler [request]
-  (log/spy :info request)
   (handle-api-request
     (:transit-params request)
     (fn [tx] (parser {:ring/request request} tx))))
