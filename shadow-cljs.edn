@@ -28,7 +28,4 @@
              :js-options {:node-modules-dir "mobile/node_modules"}
              :devtools   {:autoload   true
                           :after-load app.client-native/start
-                          :preloads   [shadow.expo.keep-awake
-                                       ;; Uncomment the following line if you're running Fulcro Inspect Electron
-                                       ;com.fulcrologic.fulcro.inspect.websocket-preload
-                                       ]}}}}
+                          :preloads   [shadow.expo.keep-awake app.inspect-native-preload]}}}}
