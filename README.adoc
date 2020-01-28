@@ -14,9 +14,8 @@ available on https://youtu.be/03I9uRxVQsc[YouTube].
 
 == Basic Usage
 
-IMPORTANT: If you want to use Electron Fulcro Inspect with
-the native app, you must uncomment the
-preload line in `shadow-cljs.edn`.
+IMPORTANT: By default native app will try to connect to Electron Fulcro Inspect.
+You may comment out the app.inspect-native-preload in `shadow-cljs.edn` to disable this.
 
 NOTE: Logging errors in the Native env will show
 an error screen on the app. Just press ESC to
