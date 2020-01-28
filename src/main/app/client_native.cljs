@@ -11,7 +11,7 @@
     [app.model.session :as session]))
 
 ;; See defines in shadow-cljs for dev mode
-(goog-define SERVER_URL "http://production.server.com/api")
+(goog-define SERVER_URL "http://production.server.com/api-native")
 
 (defn ^:export start
   {:dev/after-load true}
@@ -25,5 +25,7 @@
                                      (uism/begin! app session/session-machine ::session/session
                                        {:actor/login-form      root/Login
                                         :actor/current-session session/Session}))
-                 :remotes          {:remote (net/fulcro-http-remote {:url SERVER_URL})}}))
+                 :remotes          {:remote (net/fulcro-http-remote {:url        SERVER_URL
+                                                                     :make-xhrio #(doto (net/make-xhrio)
+                                                                                    (.setWithCredentials true))})}}))
   (start))
