@@ -28,8 +28,8 @@
                                           :default-charset        "utf-8"
                                           :not-modified-responses true}
                               :static    {:resources "public"}
-                              :session   true
-                              :security  {:anti-forgery   false
+                              :session   {:cookie-name "app-session"}
+                              :security  {:anti-forgery   true
                                           :hsts           true
                                           :ssl-redirect   false
                                           :frame-options  :sameorigin

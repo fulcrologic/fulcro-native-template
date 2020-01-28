@@ -11,6 +11,11 @@
     [taoensso.timbre :as log]
     [com.fulcrologic.fulcro.routing.dynamic-routing :as dr]))
 
+(def secured-request-middleware
+  (->
+    (net/wrap-csrf-token (or (.-fulcro_network_csrf_token js/window) "TOKEN-NOT-IN-HTML!"))
+    (net/wrap-fulcro-request)))
+
 (defn ^:export refresh []
   (log/info "Hot code Remount")
   (cssi/upsert-css "componentcss" {:component root/Root})
@@ -19,7 +24,9 @@
 (defn ^:export init []
   (log/info "Application starting.")
   (reset! SPA (app/fulcro-app
-                {:remotes {:remote (net/fulcro-http-remote {:url "/api"})}}))
+                {:remotes {:remote (net/fulcro-http-remote
+                                     {:url                "/api"
+                                      :request-middleware secured-request-middleware})}}))
   (cssi/upsert-css "componentcss" {:component root/Root})
   (app/set-root! @SPA root/Root {:initialize-state? true})
   (dr/initialize! @SPA)
