@@ -59,3 +59,24 @@ Go to the Expo terminal window and press 'i'
 An iPad/Phone simulator should start with the app.
 
 There is a demo login account of "user"/"letmein".
+
+== Usage on Android
+
+If using Android you must use a patched version of sente and specify the host for Electron Fulcro Inspect.
+
+Update `deps.edn` to use the patched version of sente
+
+```
+org.clojars.currentoor/sente        {:mvn/version "1.14.1-SNAPSHOT"}
+com.fulcrologic/fulcro              {:mvn/version "3.1.8"
+                                    :exclusions  [com.taoensso/sente]}
+```
+
+Update `shadow-cljs.edn` to connect to inspect on the host machine which is always 10.0.2.2 on the Android Studio emulator
+
+```
+:closure-defines  {'goog.DEBUG                  true
+                                             app.client-native/SERVER_URL "http://10.0.2.2:3000/api-native"
+                                             com.fulcrologic.fulcro.inspect.inspect_ws/SERVER_PORT 8237
+                                             com.fulcrologic.fulcro.inspect.inspect_ws/SERVER_HOST "10.0.2.2"}
+```

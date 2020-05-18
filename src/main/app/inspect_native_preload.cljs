@@ -5,7 +5,7 @@
     [taoensso.timbre :as log]))
 
 (when-not @inspect/started?*
-  (log/info "Installing Fulcro 3.x Inspect over Websockets targeting port " inspect-ws/SERVER_PORT)
+  (log/info "Installing Fulcro 3.x Inspect over Websockets targeting port " inspect-ws/SERVER_PORT " on " inspect-ws/SERVER_HOST)
   (reset! inspect/started?* true)
   ;; Workaround for https://github.com/ptaoussanis/sente/issues/361
   (inspect-ws/start-ws-messaging! {:channel-type :ajax}))
