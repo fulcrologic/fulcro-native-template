@@ -12,6 +12,23 @@ and native UIs, along with some basic routing.
 In the interest of time, a tour of this project is
 available on https://youtu.be/03I9uRxVQsc[YouTube].
 
+== Prerequisites
+Expo:
+https://docs.expo.dev/get-started/installation/
+
+Clojure
+https://clojure.org/guides/install_clojure
+
+=== Optional
+Fulcro electron app for debugging mobile app (fulcro inspector)
+https://github.com/fulcrologic/fulcro-inspect#using-the-fulcro-3x-electron-app
+
+React devtools
+https://docs.expo.dev/workflow/debugging/#debugging-with-react-devtools
+
+Clj-kondo config for fulcro, mount and pathom
+https://gist.github.com/gmp26/2d2a8fafa0650c80af5d79c8e2929c34
+
 == Basic Usage
 
 IMPORTANT: By default native app will try to connect to Electron Fulcro Inspect.
@@ -21,15 +38,9 @@ NOTE: Logging errors in the Native env will show
 an error screen on the app. Just press ESC to
 continue in the simulator if that happens.
 
-In one terminal, start up expo:
 
-```
-$ cd mobile
-$ yarn
-$ expo start
-```
 
-In another terminal, start up CLJS build:
+In one terminal, start up CLJS build:
 
 ```
 $ yarn
@@ -52,6 +63,15 @@ user=> (restart)
 You should see a message about starting.
 
 Open http://localhost:3000. This is the webapp.
+
+For mobile version
+In another terminal, start up expo:
+
+```
+$ cd mobile
+$ yarn
+$ npx expo start
+```
 
 Go to the Expo terminal window and press 'i'
 (requires XCode and Simulator to be installed).
@@ -80,3 +100,31 @@ Update `shadow-cljs.edn` to connect to inspect on the host machine which is alwa
                                              com.fulcrologic.fulcro.inspect.inspect_ws/SERVER_PORT 8237
                                              com.fulcrologic.fulcro.inspect.inspect_ws/SERVER_HOST "10.0.2.2"}
 ```
+
+== Debugging mobile app
+Just start fulcro electron app, after running your mobile app.
+It should work out of the box.
+If you have problem connecting try "r" in expo mobile app menu or restarting the mobile simulator
+
+For react-native in separate tab run:
+yarn run react-devtools
+
+And hit "r" in expo menu to refresh app and after that press "m" for debug options.
+This should connect react-devtools to your app.
+
+== Possible problems
+If you are getting errors while starting expo app
+make sure that mobile/app directory exists.
+If not, running npx shadow-cljs server and building should help.
+
+Iphone simulator is black:
+Just close iphone simulator device
+and hit "i" in expo menu to reopen iphone (sometimes works after third try)
+
+Warn/error when opening expo app on mobile simulator / Can't see the app
+Click Minimize to see the application.
+
+WARN [taoensso.sente] - Chsk is closed: will try reconnect
+This happens when fulcro-inspect-electron is not connected
+As stated above:
+You may comment out the app.inspect-native-preload in `shadow-cljs.edn` to disable this.
