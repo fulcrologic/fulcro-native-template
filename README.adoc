@@ -29,6 +29,9 @@ https://docs.expo.dev/workflow/debugging/#debugging-with-react-devtools
 Clj-kondo config for fulcro, mount and pathom
 https://gist.github.com/gmp26/2d2a8fafa0650c80af5d79c8e2929c34
 
+Fulcro-native library (read may be useful)
+https://github.com/fulcrologic/fulcro-native
+
 == Basic Usage
 
 IMPORTANT: By default native app will try to connect to Electron Fulcro Inspect.
@@ -107,7 +110,7 @@ It should work out of the box.
 If you have problem connecting try "r" in expo mobile app menu or restarting the mobile simulator
 
 For react-native in separate tab run:
-yarn run react-devtools
+`yarn run react-devtools`
 
 And hit "r" in expo menu to refresh app and after that press "m" for debug options.
 This should connect react-devtools to your app.
