@@ -1,4 +1,4 @@
 (ns ^:dev/once shadow.expo.keep-awake
-  (:require ["expo-keep-awake" :refer [activateKeepAwake]]))
+  (:require ["expo-keep-awake" :refer [activateKeepAwakeAsync]]))
 
-(activateKeepAwake)
+(activateKeepAwakeAsync)

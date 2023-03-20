@@ -25,3 +25,5 @@ mobile/.expo
 mobile/app
 fulcro.iml
 resources/public/js
+.clj-kondo/
+.out/

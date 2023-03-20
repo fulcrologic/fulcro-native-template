@@ -2,7 +2,7 @@
   "Entry point for native client."
   (:require
     [app.application :refer [SPA]]
-    [com.fulcrologic.fulcro-native.expo-application :as expo]
+    [com.fulcrologic.fulcro-native.expo-application-40 :as expo]
     [app.mobile-ui.root :as root]
     [taoensso.timbre :as log]
     [com.fulcrologic.fulcro.networking.http-remote :as net]
