@@ -21,6 +21,8 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
+      "/assets/images/*",
+      "/assets/fonts/*",
       "**/*"
     ],
     "ios": {

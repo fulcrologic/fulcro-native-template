@@ -4,6 +4,8 @@
     [app.application :refer [SPA]]
     [com.fulcrologic.fulcro-native.expo-application-40 :as expo]
     [app.mobile-ui.root :as root]
+    [app.mobile-ui.authentication :as auth]
+    [app.mobile-ui.resources :as resources]
     [taoensso.timbre :as log]
     [com.fulcrologic.fulcro.networking.http-remote :as net]
     [com.fulcrologic.fulcro.application :as app]
@@ -21,10 +23,12 @@
 
 (defn init []
   (reset! SPA (expo/fulcro-app
-                {:client-did-mount (fn [app]
+                {:cached-images    resources/images
+                 :cached-fonts     resources/fonts
+                 :client-did-mount (fn [app]
                                      (uism/begin! app session/session-machine ::session/session
-                                       {:actor/login-form      root/Login
-                                        :actor/current-session session/Session}))
+                                                  {:actor/login-form      auth/Login
+                                                   :actor/current-session session/Session}))
                  :remotes          {:remote (net/fulcro-http-remote {:url        SERVER_URL
                                                                      :make-xhrio #(doto (net/make-xhrio)
                                                                                     (.setWithCredentials true))})}}))
