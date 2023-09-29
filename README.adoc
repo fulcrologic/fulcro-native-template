@@ -1,54 +1,69 @@
 == Fulcro Native Template
 
-This repository is a work-in-progress.
+This branch contains a Fulcro setup into which
+a React Native raw project (not expo) can be injected.
 
-This is a project that could be used as the basis for a
-full-stack Fulcro native+web project where the logic
-of the web and native apps is shared as much as possible.
+The basic idea is this:
 
-This particular example shares login logic among the web
-and native UIs, along with some basic routing.
+top-level
+  * Clojure(script) project with source for server, web, and mobile
+  * React Native project lives in subdirectory `mobile`
 
-In the interest of time, a tour of this project is
-available on https://youtu.be/03I9uRxVQsc[YouTube].
+The top-level project emits js INTO the mobile directory, which
+is otherwise completely controlled by the React Native ecosystem.
 
 == Prerequisites
-Expo:
-https://docs.expo.dev/get-started/installation/
 
 Clojure
 https://clojure.org/guides/install_clojure
 
-=== Optional
-Fulcro electron app for debugging mobile app (fulcro inspector)
-https://github.com/fulcrologic/fulcro-inspect#using-the-fulcro-3x-electron-app
-
-React devtools
-https://docs.expo.dev/workflow/debugging/#debugging-with-react-devtools
-
-Clj-kondo config for fulcro, mount and pathom
-https://gist.github.com/gmp26/2d2a8fafa0650c80af5d79c8e2929c34
-
-Fulcro-native library (read may be useful)
-https://github.com/fulcrologic/fulcro-native
-
 == Basic Usage
 
-IMPORTANT: By default native app will try to connect to Electron Fulcro Inspect.
-You may comment out the app.inspect-native-preload in `shadow-cljs.edn` to disable this.
+First, clone this branch as a template. You'll then need to create a new react native project as a subdirectory
+according to the instructions below.
 
-NOTE: Logging errors in the Native env will show
-an error screen on the app. Just press ESC to
-continue in the simulator if that happens.
+=== Create the mobile app
 
+This repo does NOT have the mobile app set up so that you're not working with some out-of-date React Native stuff.
 
+Follow the CURRENT directions from React Native's website https://reactnative.dev/docs/environment-setup[React Native Environment Setup],
+and follow the instructions for working with React Native CLI (NOT EXPO).
 
-In one terminal, start up CLJS build:
+At the time of this writing, that basically boiled down to installing XCode and command line utilities, watchman
+making sure your node version was reasonable (e.g. use NVM with version 18) and then generating the project:
 
-```
+[source, bash]
+-----
+$ npx react-native@latest init mobile
+-----
+
+NOTE: Do this IN the project's directory, and name your mobile app "mobile" so it will make a `mobile` subdirectory.
+The cljs compile will want to find it there for js output.
+
+=== Touch up the Generated App
+
+In the `mobile` directory
+
+remove `App.jsx` and `index.js`. You'll be using shadow-cljs to generate the js.
+
+You will also need to add react-dom, even though you don't actually render dom.
+This is because parts of Fulcro refer to that package internally, though they will not
+invoke it for native:
+
+[source, bash]
+-----
+$ yarn add react-dom
+-----
+
+=== Build the CLJS:
+
+Now back in the TOP level directory (not mobile) , start up CLJS build:
+
+[source, bash]
+-----
 $ yarn
 $ npx shadow-cljs server
-```
+-----
 
 Go to http://localhost:9630/dashboard and
 click on Builds, and check the native
@@ -56,78 +71,54 @@ and web builds (you should see both of them
 build).
 
 Make sure you have the clojure CLI tools
-installed, and in a 3rd terminal start a REPL:
+installed, start a CLJ REPL:
 
-```
+[source, bash]
+-----
 $ clj -A:dev
-user=> (restart)
-```
+user=> (require 'development)
+user=> (development/start)
+-----
 
 You should see a message about starting.
 
 Open http://localhost:3000. This is the webapp.
 
 For mobile version
-In another terminal, start up expo:
+In another terminal, start up metro on an iOS simulator:
 
-```
+[source, bash]
+-----
 $ cd mobile
-$ yarn
-$ npx expo start
-```
-
-Go to the Expo terminal window and press 'i'
-(requires XCode and Simulator to be installed).
+$ yarn ios
+-----
 
 An iPad/Phone simulator should start with the app.
 
-There is a demo login account of "user"/"letmein".
+You will probably need to update `shadow-cljs.edn` to set URLs for inspect and the server. `localhost` will generally
+not work, since the mobile device itself has such an address.
+The host machine is always 10.0.2.2 for the Android Studio emulator, and you can typically use `ifconfig | grep 192`
+to find your server machine's current IP on your local router.
 
-== Usage on Android
-
-If using Android you must use a patched version of sente and specify the host for Electron Fulcro Inspect.
-
-Update `deps.edn` to use the patched version of sente
-
-```
-org.clojars.currentoor/sente        {:mvn/version "1.14.1-SNAPSHOT"}
-com.fulcrologic/fulcro              {:mvn/version "3.1.8"
-                                    :exclusions  [com.taoensso/sente]}
-```
-
-Update `shadow-cljs.edn` to connect to inspect on the host machine which is always 10.0.2.2 on the Android Studio emulator
-
-```
+[source]
+-----
 :closure-defines  {'goog.DEBUG                  true
-                                             app.client-native/SERVER_URL "http://10.0.2.2:3000/api-native"
-                                             com.fulcrologic.fulcro.inspect.inspect_ws/SERVER_PORT 8237
-                                             com.fulcrologic.fulcro.inspect.inspect_ws/SERVER_HOST "10.0.2.2"}
-```
+                    app.client-native/SERVER_URL "http://10.0.2.2:3000/api-native"
+                    com.fulcrologic.fulcro.inspect.inspect_ws/SERVER_PORT 8237
+                    com.fulcrologic.fulcro.inspect.inspect_ws/SERVER_HOST "10.0.2.2"}
+-----
 
-== Debugging mobile app
-Just start fulcro electron app, after running your mobile app.
-It should work out of the box.
-If you have problem connecting try "r" in expo mobile app menu or restarting the mobile simulator
+== Using Inspect
 
-For react-native in separate tab run:
-`yarn run react-devtools`
+Just start Fulcro Inspect electron app before running your mobile app.
+It should work out of the box and the app should auto-connect.
+If you have problem connecting try "r" in metro menu or restarting the mobile simulator
 
-And hit "r" in expo menu to refresh app and after that press "m" for debug options.
-This should connect react-devtools to your app.
+IMPORTANT: By default native app will try to connect to Electron Fulcro Inspect.
+You may comment out the app.inspect-native-preload in `shadow-cljs.edn` to disable this. If you don't have
+Inspect running you'll see an error about unable to connect to it once a second in the metro logs.
 
-== Possible problems
-If you are getting errors while starting expo app
-make sure that mobile/app directory exists.
-If not, running npx shadow-cljs server and building should help.
+NOTE: Logging errors in the Native env will show
+an error screen on the app. Just press ESC to
+continue in the simulator if that happens.
 
-Iphone simulator is black:
-Just close iphone simulator device
-and hit "i" in expo menu to reopen iphone (sometimes works after third try)
-
-Warn/error when opening expo app on mobile simulator / Can't see the app
-Click Minimize to see the application.
-
-WARN [taoensso.sente] - Chsk is closed: will try reconnect
-This happens when fulcro-inspect-electron is not connected
-As stated above:
-You may comment out the app.inspect-native-preload in `shadow-cljs.edn` to disable this.

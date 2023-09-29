@@ -10,20 +10,13 @@
   "
   (:require
     ["react-native" :as native :refer [Text Button View AppRegistry Platform]]
-    ["react" :as react]
-    [app.model.session :as session]
     [app.application :refer [SPA]]
     [app.mobile-ui.root :as root]
-    [app.mobile-ui.authentication :as auth]
-    [com.fulcrologic.fulcro.algorithms.react-interop :refer [react-factory]]
     [com.fulcrologic.fulcro.application :as app]
     [com.fulcrologic.fulcro.components :as comp :refer [defsc]]
-    [com.fulcrologic.fulcro.mutations :as m]
     [com.fulcrologic.fulcro.networking.http-remote :as net]
     [com.fulcrologic.fulcro.react.hooks :as hooks]
     [com.fulcrologic.fulcro.rendering.keyframe-render :as kr]
-    [com.fulcrologic.fulcro.routing.dynamic-routing :as dr]
-    [com.fulcrologic.fulcro.ui-state-machines :as uism]
     [taoensso.timbre :as log]))
 
 ;; Tracking for what Fulcro wants to render. We don't want to close over a constant value because then hot code
@@ -61,7 +54,7 @@
                                   body)
                                 (catch :default e
                                   (log/error e "Render failed")))))]
-          (native/AppRegistry.registerComponent "main" (fn [] RootWrapper)))
+          (native/AppRegistry.registerComponent "mobile" (fn [] RootWrapper)))
         (do
           (@force-render-atom)
           @root-component-ref)))
@@ -83,10 +76,6 @@
 
 (defn start []
   (reset! SPA APP)
-  (app/mount! APP root/Root :ignored-in-native)
-  (uism/begin! APP session/session-machine ::session/session
-    {:actor/login-form      auth/Login
-     :actor/current-session session/Session}))
-
+  (app/mount! APP root/Root :ignored-in-native))
 
 (defn ^:export init [] (start))

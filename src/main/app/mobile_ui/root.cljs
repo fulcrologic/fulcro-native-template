@@ -1,48 +1,32 @@
 (ns app.mobile-ui.root
   (:require
+    ["react-native" :refer [Text View Button]]
+    [com.fulcrologic.fulcro.algorithms.react-interop :refer [react-factory]]
     [com.fulcrologic.fulcro.components :as comp :refer [defsc]]
-    [com.fulcrologic.fulcro.routing.dynamic-routing :as dr :refer [defrouter]]
-    [com.fulcrologic.fulcro.ui-state-machines :as uism]
-    [app.mobile-ui.native-components-base :as b]
-    [app.mobile-ui.authentication :refer [Login]]
-    [app.model.session :as session]))
+    [com.fulcrologic.fulcro.mutations :as m]
+    [com.fulcrologic.fulcro.routing.dynamic-routing :as dr :refer [defrouter]]))
 
-(defn main-route []
-  (b/ui-text {} "Main Stuff"))
+(def ui-view (react-factory View))
+(def ui-text (react-factory Text))
+(def ui-button (react-factory Button))
 
-(defn settings-route []
-  (b/ui-text {} "Settings Stuff"))
-
-(def index (atom 0))
-
-(defsc Main [this {:keys [label] :as props}]
-  {:query         [:label]
+(defsc Main [this {:ui/keys [n]}]
+  {:query         [:ui/n]
    :route-segment ["main"]
-   :initial-state {:label "Main"}
+   :initial-state {:ui/n 1}
    :ident         (fn [] [:component/id :main])}
-  (let [state #js {:index  @index
-                   :routes (array
-                             #js {:key "first" :title "Main"}
-                             #js {:key "second" :title "Settings"})}]
-    (b/ui-box
-      {:padding 20}
-      (b/ui-button {:onPress     (fn []
-                                   (uism/trigger! this ::session/session :event/logout)
-                                   (dr/change-route this ["login"]))
-                    :hasText     true
-                    :transparent true} "Logout")
-      (b/ui-text {} "Hello world"))))
+  (ui-view {:padding 20}
+    (ui-text {} "Hello World")
+    (ui-button {:title   (str "N " n)
+                :onPress (fn [] (m/set-integer!! this :ui/n :value (inc n)))})))
 
 (defrouter RootRouter [_ _]
-  {:router-targets [Login Main]})
+  {:router-targets [Main]})
 
 (def ui-root-router (comp/factory RootRouter))
 
 (defsc Root [this {:root/keys [router]}]
-  {:query             [{:root/router (comp/get-query RootRouter)}]
-   :componentDidMount (fn [this]
-                        (dr/change-route this ["login"]))
-   :initial-state     {:root/router {}}}
+  {:query         [{:root/router (comp/get-query RootRouter)}]
+   :initial-state {:root/router {}}}
   (when (seq router)
-    (b/ui-base {:mt "50px"}
-      (ui-root-router router))))
+    (ui-root-router router)))
