@@ -1,5 +1,8 @@
 == Fulcro Native Template
 
+NOTE: For a template for use with Raw React Native CLI (not expo) see the `raw-native` branch of
+this repository (updated 2023-09-29).
+
 This repository is a work-in-progress.
 
 This is a project that could be used as the basis for a
