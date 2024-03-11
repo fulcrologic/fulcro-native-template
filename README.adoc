@@ -107,6 +107,20 @@ Update `shadow-cljs.edn` to connect to inspect on the host machine which is alwa
                                              com.fulcrologic.fulcro.inspect.inspect_ws/SERVER_HOST "10.0.2.2"}
 ```
 
+== Expo local modules
+In order to use a local module (assuming you already have one, if not, follow https://docs.expo.dev/modules/get-started/[this] to create an example module), you will need to make some modifications to the current template. For more details on all of the changes, have a look at https://github.com/aratare-jp/fulcro-native-template/commit/4802283b286df353d337cbff40032497bb42ef13[this commit], but TL;DR:
+
+1. Follow the above section if you're working with Android.
+2. `shadow-cljs.edn` needs to have `:output-dir "mobile/index"` within the `:native` build. This is because Expo automatically checks for this directory and will automatically fail without it. A dummy `index.js` doesn't work properly with blank screen, so your best bet is to change the output dir itself).
+3. `app.json` needs `"android": { "package": "com.example.fulcro" }`
+for Android, and `"ios": { "supportsTablet": true, "bundleIdentifier": "com.example.fulcro" }` for IOS.
+4. Follow https://github.com/expo/fyi/blob/main/absolute-path-expo-modules.md[this].
+5. `mobile/package.json` needs to have `"main": "index/index.js"`
+
+Now the app should build as expected.
+
+https://someurl[Here] is an example of a working build with a local module `CatGif` that simply returns a random URL that can be called within `mobile_ui/root.cljs` to show some cat gif!
+
 == Debugging mobile app
 Just start fulcro electron app, after running your mobile app.
 It should work out of the box.
