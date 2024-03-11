@@ -4,7 +4,7 @@
     [com.fulcrologic.fulcro-native.alpha.components :as c :refer [react-factory]]
     ["react-native" :refer [Pressable Animated]]
     ["react-native-tab-view" :refer [TabView SceneMap]]
-    ["native-base" :refer [NativeBaseProvider Container Text Center Heading Box Button Spinner FormControl Stack HStack Input]]))
+    ["native-base" :refer [NativeBaseProvider Container Text Center Heading Box Button Spinner FormControl Stack HStack Input Image]]))
 
 (def ui-base (react-factory NativeBaseProvider))
 
@@ -39,3 +39,5 @@
 (def ui-pressable (react-factory Pressable))
 
 (def ui-scene-map (partial SceneMap))
+
+(def ui-image (react-factory Image))
