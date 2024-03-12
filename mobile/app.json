@@ -26,8 +26,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.fulcro"
     },
-    "description": ""
+    "description": "",
+    "android": {
+      "package": "com.example.fulcro"
+    }
   }
 }

@@ -13,7 +13,7 @@ pom.xml.asc
 .cpcache/
 .nrepl-history
 .DS_Store
-node_modules/
+**/node_modules/
 .lein-env
 .#*
 debug.log
@@ -27,3 +27,4 @@ fulcro.iml
 resources/public/js
 .clj-kondo/
 .out/
+**/build/

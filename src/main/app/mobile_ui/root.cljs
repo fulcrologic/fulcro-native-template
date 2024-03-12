@@ -5,10 +5,15 @@
     [com.fulcrologic.fulcro.ui-state-machines :as uism]
     [app.mobile-ui.native-components-base :as b]
     [app.mobile-ui.authentication :refer [Login]]
-    [app.model.session :as session]))
+    [app.model.session :as session]
+    ["cat-gif" :refer [getCatGif]]))
 
 (defn main-route []
-  (b/ui-text {} "Main Stuff"))
+  (b/ui-image
+    {:source {:uri (getCatGif "https://cataas.com/cat" 100 "red")}
+     :alt "some cat"
+     :size "2xl"}
+    nil) )
 
 (defn settings-route []
   (b/ui-text {} "Settings Stuff"))

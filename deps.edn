@@ -1,7 +1,6 @@
 {:paths   ["src/main" "resources"]
  :deps    {org.clojure/clojure                 {:mvn/version "1.11.1"}
            org.clojure/clojurescript           {:mvn/version "1.11.60"}
-           com.fulcrologic/fulcro              {:mvn/version "3.6.1"}
            com.fulcrologic/fulcro-native       {:mvn/version "0.0.11"}
            com.fulcrologic/fulcro-garden-css   {:mvn/version "3.0.9"}
            com.fulcrologic/guardrails          {:mvn/version "1.1.11"}
@@ -25,7 +24,12 @@
            metosin/reitit-ring                 {:mvn/version "0.6.0"}
 
            ;; logging
-           com.taoensso/timbre                 {:mvn/version "6.1.0"}}
+           com.taoensso/timbre                 {:mvn/version "6.1.0"}
+           
+           org.clojars.currentoor/sente        {:mvn/version "1.14.1-SNAPSHOT"}
+           com.fulcrologic/fulcro              {:mvn/version "3.6.1"
+                                                :exclusions  [com.taoensso/sente]} 
+           }
 
  :aliases {:cljs {:jvm-opts   ["-DSENTE_ELIDE_JS_REQUIRE=true"]
                   :extra-deps {com.cognitect/transit-cljs          {:mvn/version "0.8.256"}
