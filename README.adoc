@@ -5,6 +5,8 @@ this repository (updated 2023-09-29).
 
 This repository is a work-in-progress.
 
+For an example (2024-03-11) of a working expo project with a local module, see the `expo-local-module` branch.
+
 This is a project that could be used as the basis for a
 full-stack Fulcro native+web project where the logic
 of the web and native apps is shared as much as possible.
